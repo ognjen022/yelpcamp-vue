@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="wrapper" v-if="!loading">
+     
       <div class="card radius shadowDepth1">
         <div class="card__image border-tlr-radius">
           <img :src="campground.image" alt="image" class="border-tlr-radius" />
@@ -92,7 +93,7 @@
             color="primary"
           >
             <v-icon left>mdi-message-text</v-icon>
-            {{ this.showComments ? 'Hide' : 'View' }} Comments
+            {{ this.showComments ? "Hide" : "View" }} Comments
           </v-btn>
         </div>
 
@@ -275,24 +276,24 @@
 </template>
 
 <script>
-import axios from 'axios';
-import moment from 'moment';
-import { mapGetters } from 'vuex';
-import MapDialog from '../components/MapDialog';
-import UserDialog from '../components/UserDialog';
+import axios from "axios";
+import moment from "moment";
+import { mapGetters } from "vuex";
+import MapDialog from "../components/MapDialog";
+import UserDialog from "../components/UserDialog";
 
 export default {
-  name: 'Campground',
+  name: "Campground",
   components: {
     MapDialog,
-    UserDialog,
+    UserDialog
   },
   data() {
     return {
       dialog: false,
       isEditing: null,
-      currentEditingComment: '',
-      comment_input: '',
+      currentEditingComment: "",
+      comment_input: "",
       campground: null,
       currentRating: 5,
       date: null,
@@ -302,9 +303,9 @@ export default {
       alreadyRated: false,
       isLoggedin: false,
       rules: [
-        (value) => !!value || 'Required.',
-        (value) => (value && value.length >= 3) || 'Min 3 characters',
-      ],
+        value => !!value || "Required.",
+        value => (value && value.length >= 3) || "Min 3 characters"
+      ]
     };
   },
   async created() {
@@ -313,7 +314,7 @@ export default {
     );
     this.loading = false;
     this.campground = res.data[0];
-    this.date = moment(this.campground.created_at).format('MMMM Do YYYY');
+    this.date = moment(this.campground.created_at).format("MMMM Do YYYY");
     this.calculateRating();
     this.alreadyRated = this.didIRateThis();
     this.isLoggedin = this.$store.state.User.user ? true : false;
@@ -322,15 +323,15 @@ export default {
     async deleteCampground(campgroundId) {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       try {
         await axios.delete(
           `http://127.0.0.1:8000/api/campgrounds/${campgroundId}`,
           config
         );
-        this.$router.push('/');
+        this.$router.push("/");
       } catch (err) {
         console.log(err.response.data.message);
       }
@@ -338,11 +339,11 @@ export default {
     didILikeThis(commentId) {
       if (this.$store.state.User.user) {
         const comment = this.campground.comments.find(
-          (comment) => comment.id === commentId
+          comment => comment.id === commentId
         );
         if (comment.likes.length > 0) {
           const like = comment.likes.find(
-            (like) => like.user_id === this.$store.state.User.user.id
+            like => like.user_id === this.$store.state.User.user.id
           );
           if (like) {
             return true;
@@ -359,12 +360,12 @@ export default {
     async likeComment(commentId) {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       const like = {
         comment_id: commentId,
-        user_id: this.$store.state.User.user.id,
+        user_id: this.$store.state.User.user.id
       };
       try {
         const res = await axios.post(
@@ -373,7 +374,7 @@ export default {
           config
         );
         const comment = this.campground.comments.find(
-          (comment) => comment.id === commentId
+          comment => comment.id === commentId
         );
         const index = this.campground.comments.indexOf(comment);
         comment.likes.push(res.data);
@@ -385,11 +386,11 @@ export default {
     async unlikeComment(commentId) {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       const user = {
-        user_id: this.$store.state.User.user.id,
+        user_id: this.$store.state.User.user.id
       };
       try {
         const res = await axios.post(
@@ -398,10 +399,10 @@ export default {
           config
         );
         const comment = this.campground.comments.find(
-          (comment) => comment.id === commentId
+          comment => comment.id === commentId
         );
         const index = this.campground.comments.indexOf(comment);
-        comment.likes = comment.likes.filter((like) => like.id !== res.data.id);
+        comment.likes = comment.likes.filter(like => like.id !== res.data.id);
         this.campground.comments[index] = comment;
       } catch (err) {
         console.log(err.response.data.message);
@@ -410,17 +411,17 @@ export default {
     async rateCampground() {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       const rating = {
         campground_id: this.campground.id,
         user_id: this.$store.state.User.user.id,
-        value: this.currentRating,
+        value: this.currentRating
       };
       try {
         const res = await axios.post(
-          'http://127.0.0.1:8000/api/campgrounds/rate',
+          "http://127.0.0.1:8000/api/campgrounds/rate",
           rating,
           config
         );
@@ -434,7 +435,7 @@ export default {
     didIRateThis() {
       if (this.$store.state.User.user) {
         const rating = this.campground.ratings.find(
-          (rating) => rating.user_id === this.$store.state.User.user.id
+          rating => rating.user_id === this.$store.state.User.user.id
         );
         if (!rating) {
           return false;
@@ -448,13 +449,13 @@ export default {
     async submitComment() {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       const comment = {
         content: this.comment_input,
         campground_id: this.$route.params.id,
-        creator_id: this.$store.state.User.user.id,
+        creator_id: this.$store.state.User.user.id
       };
       try {
         const res = await axios.post(
@@ -466,10 +467,10 @@ export default {
         const newComment = {
           ...res.data,
           user: this.$store.state.User.user,
-          likes: [],
+          likes: []
         };
         this.campground.comments.push(newComment);
-        this.comment_input = '';
+        this.comment_input = "";
       } catch (err) {
         console.log(err.response.data.message);
       }
@@ -477,15 +478,15 @@ export default {
     async deleteComment(commentId) {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       await axios.delete(
         `http://127.0.0.1:8000/api/comments/${commentId}`,
         config
       );
       this.campground.comments = this.campground.comments.filter(
-        (comment) => comment.id !== commentId
+        comment => comment.id !== commentId
       );
     },
     startEditing(commentId, content) {
@@ -495,11 +496,11 @@ export default {
     async editComment(commentId) {
       const config = {
         headers: {
-          Authorization: `Bearer ${this.$store.state.User.token}`,
-        },
+          Authorization: `Bearer ${this.$store.state.User.token}`
+        }
       };
       const editedComment = {
-        content: this.currentEditingComment,
+        content: this.currentEditingComment
       };
       try {
         const res = await axios.put(
@@ -510,12 +511,12 @@ export default {
         console.log(res.data);
         this.isEditing = null;
         const comment = this.campground.comments.find(
-          (comment) => comment.id === commentId
+          comment => comment.id === commentId
         );
         const newComment = {
           ...res.data,
           user: this.$store.state.User.user,
-          likes: comment.likes,
+          likes: comment.likes
         };
         const index = this.campground.comments.indexOf(comment);
         this.campground.comments[index] = newComment;
@@ -525,23 +526,21 @@ export default {
     },
     commentDate(date) {
       return moment(date)
-        .startOf('second')
+        .startOf("second")
         .fromNow();
     },
     calculateRating() {
       let totalRating = 0;
-      this.campground.ratings.forEach(
-        (rating) => (totalRating += rating.value)
-      );
+      this.campground.ratings.forEach(rating => (totalRating += rating.value));
       totalRating = totalRating / this.campground.ratings.length;
       this.rating = totalRating;
-    },
+    }
   },
   computed: {
     ...mapGetters({
-      user: 'user',
-    }),
-  },
+      user: "user"
+    })
+  }
 };
 </script>
 
@@ -750,12 +749,12 @@ h2 {
   z-index: 2;
 }
 .share-toggle:before {
-  content: '\f1e0';
-  font-family: 'FontAwesome';
+  content: "\f1e0";
+  font-family: "FontAwesome";
   color: #3498db;
 }
 .share-toggle.share-expanded:before {
-  content: '\f00d';
+  content: "\f00d";
 }
 
 .share-icon {
@@ -786,7 +785,7 @@ h2 {
   z-index: 2;
 }
 .delete-toggle:before {
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   color: #3498db;
 }
 
