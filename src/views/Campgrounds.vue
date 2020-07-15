@@ -4,6 +4,7 @@
       v-model="search"
       label="Search Campgrounds"
       style="width: 250px; margin: 10px auto;"
+      color="green"
     >
       <v-icon slot="prepend" color="green">
         mdi-magnify
