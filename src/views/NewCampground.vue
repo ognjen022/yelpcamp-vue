@@ -90,22 +90,22 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'NewCampground',
+  name: "NewCampground",
   data: () => ({
     valid: true,
-    title: '',
-    titleRules: [(v) => !!v || 'Title is required'],
-    image: '',
-    imageRules: [(v) => !!v || 'Please provide an image URL'],
-    price: '',
-    priceRules: [(v) => !!v || 'Price is required'],
-    address: '',
-    addressRules: [(v) => !!v || 'Address is required'],
-    description: '',
-    descriptionRules: [(v) => !!v || 'Please provide a description'],
+    title: "",
+    titleRules: [v => !!v || "Title is required"],
+    image: "",
+    imageRules: [v => !!v || "Please provide an image URL"],
+    price: "",
+    priceRules: [v => !!v || "Price is required"],
+    address: "",
+    addressRules: [v => !!v || "Address is required"],
+    description: "",
+    descriptionRules: [v => !!v || "Please provide a description"]
   }),
   methods: {
     validate() {
@@ -121,8 +121,8 @@ export default {
       try {
         const config = {
           headers: {
-            Authorization: `Bearer ${this.$store.state.User.token}`,
-          },
+            Authorization: `Bearer ${this.$store.state.User.token}`
+          }
         };
         const campground = {
           title: this.title,
@@ -130,7 +130,7 @@ export default {
           price: this.price,
           address: this.address,
           description: this.description,
-          creator_id: this.$store.state.User.user.id,
+          creator_id: this.$store.state.User.user.id
         };
         console.log(campground);
         const res = await axios.post(
@@ -139,12 +139,12 @@ export default {
           config
         );
         console.log(res);
-        this.$router.push('/');
+        this.$router.push("/");
       } catch (err) {
         console.log(err.response.data.message);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

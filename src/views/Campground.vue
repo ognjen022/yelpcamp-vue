@@ -1,7 +1,6 @@
 <template>
   <div>
     <div class="wrapper" v-if="!loading">
-     
       <div class="card radius shadowDepth1">
         <div class="card__image border-tlr-radius">
           <img :src="campground.image" alt="image" class="border-tlr-radius" />
@@ -270,6 +269,15 @@
             hide-details="auto"
           ></v-text-field>
         </form>
+      </div>
+    </div>
+    <div class="loader" v-else>
+      <div class="pa-3 my-15">
+        <v-progress-circular
+          color="green"
+          indeterminate
+          :size="64"
+        ></v-progress-circular>
       </div>
     </div>
   </div>

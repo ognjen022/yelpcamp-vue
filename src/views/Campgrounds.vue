@@ -10,7 +10,7 @@
         mdi-magnify
       </v-icon>
     </v-text-field>
-    <div class="campgrounds-container">
+    <div class="campgrounds-container" v-if="!loading">
       <v-card
         v-for="campground in filteredList"
         :key="campground.id"
@@ -60,6 +60,15 @@
         </v-card-actions>
       </v-card>
     </div>
+    <div class="loader" v-else>
+      <div class="pa-3">
+        <v-progress-circular
+          color="green"
+          indeterminate
+          :size="64"
+        ></v-progress-circular>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -72,14 +81,15 @@ export default {
   data() {
     return {
       search: "",
+      loading: true,
       campgrounds: []
     };
   },
   async created() {
     try {
       const res = await axios.get(`http://127.0.0.1:8000/api/campgrounds`);
-      console.log(res);
       this.campgrounds = res.data;
+      this.loading = false;
     } catch (err) {
       console.log(err.response.data.message);
     }
@@ -113,8 +123,21 @@ export default {
   margin: 0 auto;
   padding-bottom: 60px;
 }
+@media (max-width: 500px) {
+  .campgrounds-container {
+    display: initial;
+  }
+  .campground {
+    margin: 0 auto;
+  }
+}
 .campground {
   box-shadow: 13px 13px 13px -4px rgba(0, 0, 0, 0.75);
   margin: 60px;
+}
+.loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>

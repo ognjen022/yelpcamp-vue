@@ -73,23 +73,23 @@
 </template>
 
 <script>
-import axios from 'axios';
+import axios from "axios";
 
 export default {
-  name: 'Login',
+  name: "Login",
   data: () => ({
     valid: true,
-    email: '',
-    error: '',
+    email: "",
+    error: "",
     emailRules: [
-      (v) => !!v || 'E-mail is required',
-      (v) => /.+@.+\..+/.test(v) || 'E-mail must be valid',
+      v => !!v || "E-mail is required",
+      v => /.+@.+\..+/.test(v) || "E-mail must be valid"
     ],
-    password: '',
+    password: "",
     passwordRules: [
-      (v) => !!v || 'Password is required',
-      (v) => (v && v.length > 6) || 'Password must be at least 6 characters',
-    ],
+      v => !!v || "Password is required",
+      v => (v && v.length > 6) || "Password must be at least 6 characters"
+    ]
   }),
   methods: {
     validate() {
@@ -104,7 +104,7 @@ export default {
     async submitLogin() {
       const loginData = {
         password: this.password,
-        email: this.email,
+        email: this.email
       };
       try {
         const res = await axios.post(
@@ -113,19 +113,19 @@ export default {
         );
         const payload = {
           token: res.data.token,
-          user: res.data.user[0],
+          user: res.data.user[0]
         };
-        this.$store.dispatch('login', payload);
-        this.$router.push('/');
+        this.$store.dispatch("login", payload);
+        this.$router.push("/");
       } catch (err) {
         this.error = err.response.data.error;
         console.log(err.response.data.error);
         setTimeout(() => {
-          this.error = '';
+          this.error = "";
         }, 8000);
       }
-    },
-  },
+    }
+  }
 };
 </script>
 

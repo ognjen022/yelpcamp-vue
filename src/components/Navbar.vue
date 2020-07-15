@@ -1,7 +1,12 @@
 <template>
   <v-app>
     <v-card class="overflow-hidden">
-      <v-app-bar absolute color="light-green accent-4" elevate-on-scroll>
+      <v-app-bar
+        absolute
+        color="light-green accent-4"
+        class="navbar"
+        elevate-on-scroll
+      >
         <router-link style="color: white; margin-left: 30px;" to="/">
           <v-toolbar-title>
             <i class="fas fa-campground"></i>YelpCamp
@@ -31,7 +36,7 @@
             <template v-slot:activator="{ on, attrs }">
               <v-btn color="white" text small v-bind="attrs" v-on="on">
                 <img class="user-avatar" :src="user.image" />
-                {{ user.name.split(' ')[0] }}
+                {{ user.name.split(" ")[0] }}
                 <v-icon dark right>mdi-menu-down</v-icon>
               </v-btn>
             </template>
@@ -60,24 +65,24 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 
 export default {
-  name: 'Navbar',
+  name: "Navbar",
   data() {
     return {};
   },
   methods: {
     logout() {
-      this.$store.dispatch('logout');
-      this.$router.push('/');
-    },
+      this.$store.dispatch("logout");
+      this.$router.push("/");
+    }
   },
   computed: {
     ...mapGetters({
-      user: 'user',
-    }),
-  },
+      user: "user"
+    })
+  }
 };
 </script>
 
@@ -85,6 +90,12 @@ export default {
 a {
   text-decoration: none;
 }
+@media (max-width: 500px) {
+  .navbar {
+    height: 64px;
+  }
+}
+
 .user-avatar {
   height: 30px;
   width: 30px;
