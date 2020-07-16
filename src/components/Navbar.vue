@@ -49,6 +49,15 @@
                 </router-link>
               </v-list-item>
               <v-list-item>
+                <router-link
+                  :to="`/profile/${this.$store.state.User.user.id}/edit`"
+                >
+                  <v-btn class="ma-2" color="green" text small>
+                    Edit Profile<v-icon dark right>mdi-account</v-icon>
+                  </v-btn>
+                </router-link>
+              </v-list-item>
+              <v-list-item>
                 <v-btn class="ma-2" @click="logout" color="green" text small>
                   Logout<v-icon dark right>mdi-logout-variant</v-icon>
                 </v-btn>
