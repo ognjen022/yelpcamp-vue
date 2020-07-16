@@ -53,7 +53,7 @@
             style="text-decoration: none; color: inherit; margin: 0 auto;"
             :to="'/campgrounds/' + campground.id"
           >
-            <v-btn color="deep-purple lighten-2" class="center" text>
+            <v-btn color="success" class="center" text>
               More Info
             </v-btn>
           </router-link>

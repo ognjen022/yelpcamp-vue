@@ -189,7 +189,6 @@ export default {
         );
         this.$store.state.User.user = res.data;
         this.$router.push("/");
-        console.log(res.data);
       } catch (err) {
         console.log(err.response.data);
       }
@@ -250,7 +249,6 @@ body {
   justify-content: center;
   padding: 12px;
   background: #64dd11;
-  /* background: linear-gradient(135deg, #3f4159 0%, #725767 50%, #cd908b 100%); */
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='$mauve', endColorstr='$blush',GradientType=1);
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro",
     "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue",
@@ -268,7 +266,6 @@ textarea,
 button {
   appearance: none;
   box-shadow: none;
-  border: 10px solid red;
 
   font-family: "brandon-grotesque", "Brandon Grotesque", "Source Sans Pro",
     "Segoe UI", Frutiger, "Frutiger Linotype", "Dejavu Sans", "Helvetica Neue",
@@ -276,7 +273,6 @@ button {
   resize: none;
 }
 input {
-  border: 1px solid red;
   border: 0;
   outline: 0;
 }
@@ -296,7 +292,7 @@ input[type="submit"] {
   opacity: 0;
   transform-origin: center top;
   will-change: opacity, transform;
-  animation: rotateIn 1000ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
+  animation: rotateIn 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 500ms forwards;
   position: relative;
   display: flex;
   flex-flow: row wrap;
@@ -316,7 +312,6 @@ input[type="submit"] {
 }
 span.nav {
   transition: all 150ms ease-out;
-  /* flex-basis: 25%; */
   display: block;
   position: relative;
   width: 100%;

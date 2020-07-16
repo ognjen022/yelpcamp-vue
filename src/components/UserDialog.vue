@@ -28,12 +28,6 @@
                 {{ date }}
               </v-list-item-subtitle>
             </v-list-item-content>
-
-            <!-- <v-list-item-action>
-              <v-btn :class="fav ? 'red--text' : ''" icon @click="fav = !fav">
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-            </v-list-item-action> -->
           </v-list-item>
         </v-list>
       </v-card>
@@ -42,17 +36,17 @@
 </template>
 
 <script>
-import moment from 'moment';
+import moment from "moment";
 
 export default {
-  name: 'UserDialog',
-  props: ['user', 'image'],
+  name: "UserDialog",
+  props: ["user", "image"],
   data: () => ({
-    date: null,
+    date: null
   }),
-  created() {
-    this.date = moment(this.user.created_at).format('MMMM Do YYYY');
-  },
+  reated() {
+    this.date = moment(this.user.created_at).format("MMMM Do YYYY");
+  }
 };
 </script>
 

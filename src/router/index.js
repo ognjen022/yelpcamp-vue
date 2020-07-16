@@ -27,12 +27,12 @@ const routes = [
     },
   },
   {
-    path: '/profile/:id/edit',
+    path: '/editprofile',
     name: 'EditProfile',
     component: EditProfile,
     beforeEnter: (to, from, next) => {
-      if (store.state.User.user.id !== parseInt(to.params.id)) {
-        next({ name: 'Campgrounds' });
+      if (to.name !== 'Login' && !store.state.User.user) {
+        next({ name: 'Login' });
       } else {
         next();
       }

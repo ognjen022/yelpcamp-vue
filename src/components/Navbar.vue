@@ -49,9 +49,7 @@
                 </router-link>
               </v-list-item>
               <v-list-item>
-                <router-link
-                  :to="`/profile/${this.$store.state.User.user.id}/edit`"
-                >
+                <router-link :to="`/editprofile`">
                   <v-btn class="ma-2" color="green" text small>
                     Edit Profile<v-icon dark right>mdi-account</v-icon>
                   </v-btn>
