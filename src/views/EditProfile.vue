@@ -131,6 +131,11 @@
                   />
                 </div>
               </fieldset>
+              <p
+                style="color: red; text-align: center; margin-top: 10px; margin-bottom: 10px;"
+              >
+                {{ imageError }}
+              </p>
             </li>
           </ul>
         </form>
@@ -153,6 +158,7 @@ export default {
       password: "",
       useAvatar: true,
       newPassword: "",
+      imageError: "",
       image: ""
     };
   },
@@ -169,6 +175,14 @@ export default {
         : "https://medgoldresources.com/wp-content/uploads/2018/02/avatar-placeholder.gif";
     },
     async submitForm() {
+      if (
+        this.useAvatar === true &&
+        this.image ===
+          "https://medgoldresources.com/wp-content/uploads/2018/02/avatar-placeholder.gif"
+      ) {
+        this.imageError = "Please choose an avatar";
+        return;
+      }
       try {
         const config = {
           headers: {
@@ -206,6 +220,12 @@ export default {
       this.email = res.data.user.email;
       this.name = res.data.user.name;
       this.image = res.data.user.image;
+      if (
+        this.image ===
+        "https://medgoldresources.com/wp-content/uploads/2018/02/avatar-placeholder.gif"
+      ) {
+        this.useAvatar = false;
+      }
       this.loading = false;
     } catch (error) {
       console.log(error.response.data);

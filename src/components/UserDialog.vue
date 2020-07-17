@@ -44,7 +44,7 @@ export default {
   data: () => ({
     date: null
   }),
-  reated() {
+  created() {
     this.date = moment(this.user.created_at).format("MMMM Do YYYY");
   }
 };
