@@ -197,7 +197,7 @@ export default {
           newPassword: this.newPassword
         };
         const res = await axios.put(
-          `http://127.0.0.1:8000/api/users/${this.$store.state.User.user.id}`,
+          `${process.env.VUE_APP_API_URL}/api/users/${this.$store.state.User.user.id}`,
           profile,
           config
         );
@@ -215,7 +215,10 @@ export default {
           Authorization: `Bearer ${this.$store.state.User.token}`
         }
       };
-      const res = await axios.get(`http://127.0.0.1:8000/api/me`, config);
+      const res = await axios.get(
+        `${process.env.VUE_APP_API_URL}/api/me`,
+        config
+      );
       this.user = res.data.user;
       this.email = res.data.user.email;
       this.name = res.data.user.name;

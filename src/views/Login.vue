@@ -108,7 +108,7 @@ export default {
       };
       try {
         const res = await axios.post(
-          `http://127.0.0.1:8000/api/login`,
+          `${process.env.VUE_APP_API_URL}/api/login`,
           loginData
         );
         const payload = {

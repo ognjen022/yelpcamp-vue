@@ -87,7 +87,9 @@ export default {
   },
   async created() {
     try {
-      const res = await axios.get(`http://127.0.0.1:8000/api/campgrounds`);
+      const res = await axios.get(
+        `${process.env.VUE_APP_API_URL}/api/campgrounds`
+      );
       this.campgrounds = res.data;
       this.loading = false;
     } catch (err) {

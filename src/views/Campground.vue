@@ -318,7 +318,7 @@ export default {
   },
   async created() {
     const res = await axios.get(
-      `http://127.0.0.1:8000/api/campgrounds/${this.$route.params.id}`
+      `${process.env.VUE_APP_API_URL}/api/campgrounds/${this.$route.params.id}`
     );
     this.loading = false;
     this.campground = res.data[0];
@@ -336,7 +336,7 @@ export default {
       };
       try {
         await axios.delete(
-          `http://127.0.0.1:8000/api/campgrounds/${campgroundId}`,
+          `${process.env.VUE_APP_API_URL}/api/campgrounds/${campgroundId}`,
           config
         );
         this.$router.push("/");
@@ -377,7 +377,7 @@ export default {
       };
       try {
         const res = await axios.post(
-          `http://127.0.0.1:8000/api/comments/${commentId}/like`,
+          `${process.env.VUE_APP_API_URL}/api/comments/${commentId}/like`,
           like,
           config
         );
@@ -402,7 +402,7 @@ export default {
       };
       try {
         const res = await axios.post(
-          `http://127.0.0.1:8000/api/comments/${commentId}/unlike`,
+          `${process.env.VUE_APP_API_URL}/api/comments/${commentId}/unlike`,
           user,
           config
         );
@@ -429,7 +429,7 @@ export default {
       };
       try {
         const res = await axios.post(
-          "http://127.0.0.1:8000/api/campgrounds/rate",
+          `${process.env.VUE_APP_API_URL}/api/campgrounds/rate`,
           rating,
           config
         );
@@ -467,7 +467,7 @@ export default {
       };
       try {
         const res = await axios.post(
-          `http://127.0.0.1:8000/api/comments`,
+          `${process.env.VUE_APP_API_URL}/api/comments`,
           comment,
           config
         );
@@ -490,7 +490,7 @@ export default {
         }
       };
       await axios.delete(
-        `http://127.0.0.1:8000/api/comments/${commentId}`,
+        `${process.env.VUE_APP_API_URL}/api/comments/${commentId}`,
         config
       );
       this.campground.comments = this.campground.comments.filter(
@@ -512,7 +512,7 @@ export default {
       };
       try {
         const res = await axios.put(
-          `http://127.0.0.1:8000/api/comments/${commentId}`,
+          `${process.env.VUE_APP_API_URL}/api/comments/${commentId}`,
           editedComment,
           config
         );

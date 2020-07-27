@@ -134,7 +134,7 @@ export default {
         };
         console.log(campground);
         const res = await axios.post(
-          `http://127.0.0.1:8000/api/campgrounds`,
+          `${process.env.VUE_APP_API_URL}/api/campgrounds`,
           campground,
           config
         );

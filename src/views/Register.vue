@@ -189,7 +189,7 @@ export default {
         };
         console.log(registerData);
         const res = await axios.post(
-          `http://127.0.0.1:8000/api/register`,
+          `${process.env.VUE_APP_API_URL}/api/register`,
           registerData
         );
         this.$store.dispatch("register", res.data);
