@@ -134,7 +134,7 @@
               <p
                 style="color: red; text-align: center; margin-top: 10px; margin-bottom: 10px;"
               >
-                {{ imageError }}
+                {{ error }}
               </p>
             </li>
           </ul>
@@ -158,7 +158,7 @@ export default {
       password: "",
       useAvatar: true,
       newPassword: "",
-      imageError: "",
+      error: "",
       image: ""
     };
   },
@@ -180,7 +180,7 @@ export default {
         this.image ===
           "https://medgoldresources.com/wp-content/uploads/2018/02/avatar-placeholder.gif"
       ) {
-        this.imageError = "Please choose an avatar";
+        this.error = "Please choose an avatar";
         return;
       }
       try {
@@ -204,6 +204,7 @@ export default {
         this.$store.state.User.user = res.data;
         this.$router.push("/");
       } catch (err) {
+        this.error = "Old password is incorrect";
         console.log(err.response.data);
       }
     }
